@@ -48,6 +48,14 @@ public class DocumentRequestService {
     this.userRepository = userRepository;
   }
 
+  /**
+   * Retrieves the authenticated user's document requests using the supplied filters and pagination settings.
+   *
+   * @param userPrincipal the authenticated user
+   * @param request       the request filters and pagination settings
+   * @return a paginated response containing the user's document requests
+   * @throws ApiException if the user is not a student or faculty member
+   */
   public PaginatedResponse<UserDocumentRequestDto> getUserDocumentRequests(
       CustomUserPrincipal userPrincipal, DocumentRequestSearchRequest request) {
 
@@ -65,6 +73,13 @@ public class DocumentRequestService {
     return PaginatedResponse.fromPage(requestPage, documentRequestMapper::toDto);
   }
 
+  /**
+   * Creates a pending document request for a research paper and notifies the paper's department administrators.
+   *
+   * @param requestDto     the request data containing the paper identifier
+   * @param userPrincipal  the authenticated student or faculty member submitting the request
+   * @return               a response containing the created request identifier
+   */
   @Transactional
   public CreateRequestResponse createRequest(
       CreateRequestRequest requestDto, CustomUserPrincipal userPrincipal) {
@@ -210,6 +225,13 @@ public class DocumentRequestService {
     return null;
   }
 
+  /**
+   * Accepts a pending document request authorized for the administrator's department.
+   *
+   * @param requestId     the identifier of the document request to accept
+   * @param userPrincipal the authenticated administrator
+   * @return the accepted request represented as an administrator response
+   */
   @Transactional
   public AdminRequestResponse acceptRequest(Integer requestId, CustomUserPrincipal userPrincipal) {
     // Authorization: must be admin
@@ -258,6 +280,14 @@ public class DocumentRequestService {
     return documentRequestMapper.toAdminDto(savedRequest);
   }
 
+  /**
+   * Rejects a pending document request and records the rejection reason.
+   *
+   * @param requestId       the identifier of the request to reject
+   * @param reason          the reason for rejecting the request
+   * @param userPrincipal   the authenticated administrator performing the rejection
+   * @return                the rejected request as an administrative response
+   */
   @Transactional
   public AdminRequestResponse rejectRequest(
       Integer requestId, String reason, CustomUserPrincipal userPrincipal) {

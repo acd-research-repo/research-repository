@@ -13,6 +13,12 @@ public class SseEmitterService {
   // one emitter per user — second tab replaces first, use per-connection list if needed
   private final Map<Integer, SseEmitter> emitters = new ConcurrentHashMap<>();
 
+  /**
+   * Creates and registers an SSE emitter for a user.
+   *
+   * @param userId the ID of the user associated with the emitter
+   * @return the registered SSE emitter
+   */
   public SseEmitter addEmitter(Integer userId) {
     SseEmitter emitter = new SseEmitter(0L);
     emitters.put(userId, emitter);
@@ -22,10 +28,21 @@ public class SseEmitterService {
     return emitter;
   }
 
+  /**
+   * Removes the server-sent events emitter associated with a user.
+   *
+   * @param userId the ID of the user whose emitter should be removed
+   */
   public void removeEmitter(Integer userId) {
     emitters.remove(userId);
   }
 
+  /**
+   * Sends a notification event to the user's active SSE connection.
+   *
+   * @param userId the identifier of the recipient user
+   * @param dto the notification data to send
+   */
   public void sendToUser(Integer userId, NotificationDto dto) {
     SseEmitter emitter = emitters.get(userId);
     if (emitter != null) {

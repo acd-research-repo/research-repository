@@ -20,10 +20,21 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
   private final ObjectMapper objectMapper;
 
+  /**
+   * Creates an authentication entry point that serializes error responses with the specified object mapper.
+   *
+   * @param objectMapper the object mapper used to serialize authentication error responses
+   */
   public RestAuthenticationEntryPoint(ObjectMapper objectMapper) {
     this.objectMapper = objectMapper;
   }
 
+  /**
+   * Writes a JSON response indicating that authentication is required.
+   *
+   * @param response HTTP response to populate with the unauthorized error payload
+   * @throws IOException if the error response cannot be written
+   */
   @Override
   public void commence(
       HttpServletRequest request,

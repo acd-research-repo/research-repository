@@ -10,10 +10,26 @@ import org.springframework.data.repository.query.Param;
 
 public interface NotificationRepository extends JpaRepository<Notification, Integer> {
 
-  Page<Notification> findByUserUserIdOrderByCreatedAtDesc(Integer userId, Pageable pageable);
+  /**
+ * Retrieves a user's notifications in reverse chronological order.
+ *
+ * @return a page of notifications ordered by creation time descending
+ */
+Page<Notification> findByUserUserIdOrderByCreatedAtDesc(Integer userId, Pageable pageable);
 
-  long countByUserUserIdAndIsReadFalse(Integer userId);
+  /**
+ * Counts unread notifications belonging to a user.
+ *
+ * @param userId the user's identifier
+ * @return the number of unread notifications for the user
+ */
+long countByUserUserIdAndIsReadFalse(Integer userId);
 
+  /**
+   * Marks all notifications for a user as read.
+   *
+   * @param userId the identifier of the user whose notifications are updated
+   */
   @Modifying
   @Query("UPDATE Notification n SET n.isRead = true WHERE n.user.userId = :userId")
   void markAllReadByUserId(@Param("userId") Integer userId);

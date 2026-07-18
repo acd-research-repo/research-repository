@@ -2,8 +2,13 @@ import type { ReactNode } from "react";
 import { useCallback, useRef } from "react";
 import style from "./NotificationList.module.css";
 import type { NotificationDto } from "@/types";
-import { useTick } from "../../hooks/useTick";
 
+/**
+ * Formats a notification message by emphasizing the source after the last `" from "` separator.
+ *
+ * @param message - The notification message to format
+ * @returns The formatted message content
+ */
 function renderMessage(message: string): ReactNode {
   const idx = message.lastIndexOf(" from ");
   if (idx === -1) return message;
@@ -16,6 +21,12 @@ function renderMessage(message: string): ReactNode {
   );
 }
 
+/**
+ * Formats a date as a relative time label or localized calendar date.
+ *
+ * @param dateString - The date to format.
+ * @returns A relative time label for dates within the past week, or a localized date string otherwise.
+ */
 function timeAgo(dateString: string): string {
   const now = Date.now();
   const date = new Date(dateString).getTime();
@@ -36,7 +47,7 @@ interface NotificationListProps {
   hasNextPage: boolean;
   totalCount: number;
   onLoadMore: () => void;
-  onNotificationClick: (notification: NotificationDto) => void;
+  onNotificationClick: (type: string) => void;
 }
 
 export const NotificationList = ({
@@ -51,7 +62,6 @@ export const NotificationList = ({
 }: NotificationListProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
-  useTick(60_000);
 
   const lastItemRef = useCallback(
     (node: HTMLDivElement | null) => {
@@ -113,12 +123,12 @@ export const NotificationList = ({
             role="button"
             tabIndex={0}
             onClick={() => {
-              onNotificationClick(notification);
+              onNotificationClick(notification.type);
             }}
             onKeyDown={(e) => {
               if (e.key === "Enter" || e.key === " ") {
                 e.preventDefault();
-                onNotificationClick(notification);
+                onNotificationClick(notification.type);
               }
             }}
           >

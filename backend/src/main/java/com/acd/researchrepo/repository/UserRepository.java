@@ -15,12 +15,37 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
   Optional<User> findById(Integer userId);
 
-  boolean existsByDepartmentDepartmentId(Integer departmentId);
+  /**
+ * Determines whether any user is associated with the specified department.
+ *
+ * @param departmentId the department identifier
+ * @return {@code true} if at least one user is associated with the department, {@code false} otherwise
+ */
+boolean existsByDepartmentDepartmentId(Integer departmentId);
 
-  List<User> findByDepartmentDepartmentIdAndRole(Integer departmentId, UserRole role);
+  /**
+ * Finds users assigned to a department with the specified role.
+ *
+ * @param departmentId the department identifier
+ * @param role         the user role to match
+ * @return users matching the department and role
+ */
+List<User> findByDepartmentDepartmentIdAndRole(Integer departmentId, UserRole role);
 
-  long countByDepartmentDepartmentId(Integer departmentId);
+  /**
+ * Counts the users associated with a department.
+ *
+ * @param departmentId the identifier of the department
+ * @return the number of users associated with the department
+ */
+long countByDepartmentDepartmentId(Integer departmentId);
 
+  /**
+   * Counts users grouped by department for the specified department IDs.
+   *
+   * @param ids department IDs to include
+   * @return rows containing each department ID and its associated user count
+   */
   @Query(
       "SELECT u.department.departmentId, COUNT(u) FROM User u "
           + "WHERE u.department.departmentId IN :ids AND u.department IS NOT NULL "

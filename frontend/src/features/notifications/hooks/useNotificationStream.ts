@@ -14,6 +14,11 @@ interface UseNotificationStreamOptions {
   onNotification?: () => void;
 }
 
+/**
+ * Maintains a server-sent notification stream for the authenticated user.
+ *
+ * @param onNotification - Callback invoked when a notification message with an identifier is received
+ */
 export function useNotificationStream(
   { onNotification }: UseNotificationStreamOptions = {},
 ) {

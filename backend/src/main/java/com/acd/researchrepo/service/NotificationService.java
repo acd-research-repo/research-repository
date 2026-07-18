@@ -29,6 +29,15 @@ public class NotificationService {
     this.userRepository = userRepository;
   }
 
+  /**
+   * Creates a notification, persists it, and sends it to the specified user.
+   *
+   * @param userId           the ID of the notification recipient
+   * @param message          the notification message
+   * @param type             the notification type
+   * @param relatedRequestId the ID of the related request
+   * @return the created notification
+   */
   @Transactional
   public NotificationDto createAndSend(
       Integer userId, String message, String type, Integer relatedRequestId) {
@@ -48,33 +57,36 @@ public class NotificationService {
     return dto;
   }
 
+  /**
+   * Retrieves a user's notifications in descending creation order.
+   *
+   * @param userId   the ID of the user whose notifications are retrieved
+   * @param pageable pagination and page-size settings
+   * @return a paginated response containing the user's notification DTOs
+   */
   public PaginatedResponse<NotificationDto> getNotifications(Integer userId, Pageable pageable) {
     return PaginatedResponse.fromPage(
         notificationRepository.findByUserUserIdOrderByCreatedAtDesc(userId, pageable),
         notificationMapper::toDto);
   }
 
+  /**
+   * Counts the unread notifications for a user.
+   *
+   * @param userId the ID of the user
+   * @return the number of unread notifications
+   */
   public long getUnreadCount(Integer userId) {
     return notificationRepository.countByUserUserIdAndIsReadFalse(userId);
   }
 
+  /**
+   * Marks all notifications belonging to a user as read.
+   *
+   * @param userId the ID of the user whose notifications should be marked as read
+   */
   @Transactional
   public void markAllRead(Integer userId) {
     notificationRepository.markAllReadByUserId(userId);
-  }
-
-  @Transactional
-  public void markAsRead(Integer notificationId, Integer userId) {
-    Notification notification = notificationRepository
-        .findById(notificationId)
-        .orElseThrow(() -> new RuntimeException("Notification not found"));
-
-    // ownership check inline, no custom repo method needed
-    if (!notification.getUser().getUserId().equals(userId)) {
-      throw new RuntimeException("Unauthorized");
-    }
-
-    notification.setIsRead(true);
-    notificationRepository.save(notification);
   }
 }

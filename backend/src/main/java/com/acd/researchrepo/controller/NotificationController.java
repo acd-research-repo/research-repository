@@ -12,7 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,12 +26,24 @@ public class NotificationController {
   private final NotificationService notificationService;
   private final SseEmitterService sseEmitterService;
 
+  /**
+   * Creates a notification controller with the services used by its endpoints.
+   *
+   * @param notificationService service for retrieving and updating notifications
+   * @param sseEmitterService service for managing notification event streams
+   */
   public NotificationController(
       NotificationService notificationService, SseEmitterService sseEmitterService) {
     this.notificationService = notificationService;
     this.sseEmitterService = sseEmitterService;
   }
 
+  /**
+   * Opens a server-sent event stream for the authenticated user.
+   *
+   * @param principal the authenticated user's security principal
+   * @return the emitter for the user's notification stream
+   */
   @GetMapping(value = "/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
   public SseEmitter streamNotifications(
       @AuthenticationPrincipal CustomUserPrincipal principal) {
@@ -40,6 +51,14 @@ public class NotificationController {
     return sseEmitterService.addEmitter(principal.getUserId());
   }
 
+  /**
+   * Retrieves a paginated list of notifications for the authenticated user.
+   *
+   * @param page the zero-based page number
+   * @param size the number of notifications per page
+   * @param principal the authenticated user's principal
+   * @return the user's notifications for the requested page
+   */
   @GetMapping
   public ResponseEntity<PaginatedResponse<NotificationDto>> getNotifications(
       @RequestParam(defaultValue = "0") int page,
@@ -50,6 +69,12 @@ public class NotificationController {
     return ResponseEntity.ok(notificationService.getNotifications(principal.getUserId(), pageable));
   }
 
+  /**
+   * Retrieves the number of unread notifications for the authenticated user.
+   *
+   * @param principal the authenticated user's principal
+   * @return the user's unread notification count
+   */
   @GetMapping("/unread-count")
   public ResponseEntity<Long> getUnreadCount(
       @AuthenticationPrincipal CustomUserPrincipal principal) {
@@ -58,20 +83,17 @@ public class NotificationController {
     return ResponseEntity.ok(count);
   }
 
+  /**
+   * Marks all notifications for the authenticated user as read.
+   *
+   * @param principal the authenticated user's principal
+   * @return an empty response with HTTP status 204
+   */
   @PutMapping("/mark-all-read")
   public ResponseEntity<Void> markAllRead(
       @AuthenticationPrincipal CustomUserPrincipal principal) {
     log.debug("PUT /api/notifications/mark-all-read endpoint hit");
     notificationService.markAllRead(principal.getUserId());
-    return ResponseEntity.noContent().build();
-  }
-
-  @PutMapping("/{id}/read")
-  public ResponseEntity<Void> markAsRead(
-      @PathVariable Integer id,
-      @AuthenticationPrincipal CustomUserPrincipal principal) {
-    log.debug("PUT /api/notifications/{}/read endpoint hit", id);
-    notificationService.markAsRead(id, principal.getUserId());
     return ResponseEntity.noContent().build();
   }
 }
