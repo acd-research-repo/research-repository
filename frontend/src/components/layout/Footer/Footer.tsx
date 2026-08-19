@@ -41,7 +41,7 @@ export const Footer = ({ className, ...props }: ComponentProps) => {
 
               <div className={style.textContainer}>
                 <h1 className={style.title}>ACD Research Repository</h1>
-                <p className={style.subtitle}>Assumption Collage of Davao</p>
+                <p className={style.subtitle}>Assumption College of Davao</p>
                 <p className={style.description}>
                   The official research repository of Assumption College of Davao, providing access
                   to academic research and scholarly work.
