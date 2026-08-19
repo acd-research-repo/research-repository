@@ -79,6 +79,9 @@ jobs:
     defaults:
       run:
         working-directory: frontend
+    env:
+      VITE_GOOGLE_CLIENT_ID: ${{ vars.VITE_GOOGLE_CLIENT_ID }}
+      VITE_BACKEND_API_BASE_URL: ${{ vars.VITE_BACKEND_API_BASE_URL }}
 
     steps:
       - name: Checkout

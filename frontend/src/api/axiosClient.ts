@@ -1,5 +1,6 @@
 import axios from "axios";
 import { postRefresh } from "@/api/auth";
+import { env } from "@/env";
 import {
   getAccessToken,
   removeAccessToken,
@@ -8,7 +9,7 @@ import {
 import type { ApiError } from "@/types/api";
 import { extractApiError, isAuthError } from "@/util/errorHandler";
 
-const BASE_URL = import.meta.env.VITE_BACKEND_API_BASE_URL;
+const BASE_URL = env.backendApiBaseUrl;
 
 // General axios client
 export const axiosClient = axios.create({

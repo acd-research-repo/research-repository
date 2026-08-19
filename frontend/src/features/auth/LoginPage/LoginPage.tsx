@@ -10,6 +10,7 @@ import {
 } from "@/components/common/Dialog/Dialog";
 import { Link } from "@/components/common/Link/Link";
 import { LoadingSpinner } from "@/components/common/LoadingSpinner/LoadingSpinner";
+import { env } from "@/env";
 import { GoogleButton } from "@/features/auth/components/GoogleButton/GoogleButton";
 import { useAuth } from "@/features/auth/context/useAuth";
 import { useGoogleLogin } from "@/features/auth/hooks/useGoogleLogin";
@@ -31,7 +32,7 @@ export const LoginPage = () => {
     }
     return null;
   });
-  const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || "";
+  const googleClientId = env.googleClientId;
 
   const handleGoogleSuccess = useGoogleLogin(setShowErrorModal);
 
