@@ -1,3 +1,4 @@
+import { useQueryClient } from "@tanstack/react-query";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { LibraryResults } from "../components/LibraryResults/LibraryResults";
@@ -29,20 +30,14 @@ export const LibraryPage = () => {
     pagination,
   } = useLibrary();
   const [selectedPaperId, setSelectedPaperId] = useState<number | null>(null);
-  const isModalOpen = selectedPaperId !== null;
-  const [prevPaperError, setPrevPaperError] = useState<string | null>(null);
   const {
     paper: selectedPaper,
     loading: paperLoading,
     error: paperError,
   } = usePaperById(selectedPaperId);
+  const queryClient = useQueryClient();
 
   useScrollToTop([currentPage]);
-
-  if (paperError && paperError !== prevPaperError) {
-    setPrevPaperError(paperError);
-    setSelectedPaperId(null);
-  }
 
   useEffect(() => {
     if (paperError) {
@@ -51,6 +46,7 @@ export const LibraryPage = () => {
   }, [paperError]);
 
   const handleOpenModal = (id: number) => {
+    void queryClient.invalidateQueries({ queryKey: ["paper", id] });
     setSelectedPaperId(id);
   };
 
@@ -122,7 +118,7 @@ export const LibraryPage = () => {
         </div>
       </main>
 
-      {isModalOpen && selectedPaper && (
+      {selectedPaper && (
         <ResearchModal
           isOpen
           paper={selectedPaper}
