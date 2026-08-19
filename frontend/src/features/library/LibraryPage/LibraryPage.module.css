@@ -31,13 +31,15 @@
   flex-direction: column;
   gap: var(--space-xl);
   max-width: var(--container-max-width);
-  padding: var(--space-xl) var(--space-xl);
+  padding-block: var(--space-xl);
+  padding-inline: var(--container-padding-inline);
   margin: 0 auto;
 }
 
 @media (width >= 768px) {
   .mainContainer {
-    padding: var(--space-2xl) var(--space-7xl);
+    padding-block: var(--space-2xl);
+    padding-inline: var(--container-padding-inline);
   }
 }
 
