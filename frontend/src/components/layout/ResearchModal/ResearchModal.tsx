@@ -1,4 +1,4 @@
-import { File } from "lucide-react";
+import { Download, Eye } from "lucide-react";
 import { usePaperRequest } from "./hook/usePaperRequest";
 import style from "./ResearchModal.module.css";
 import { downloadFile, viewFileInTab } from "@/api/files";
@@ -28,7 +28,6 @@ export const ResearchModal = ({ isOpen, paper, onClose }: ResearchModalProps) =>
 
   const formattedDate = formatDateLong(paper.submissionDate);
   const department = paper.department.departmentName;
-  const fileName = paper.originalFileName ?? paper.filePath?.split("/").pop() ?? "paper.pdf";
 
   const handleView = () => {
     if (!paper.paperId) return;
@@ -72,25 +71,17 @@ export const ResearchModal = ({ isOpen, paper, onClose }: ResearchModalProps) =>
 
         {(isUserSuperOrDepartmentAdmin(user) ||
           (paper.uploadedBy?.userId != null && paper.uploadedBy.userId === user?.userId)) && (
-          <div
-            className={style.fileCard}
-            onClick={handleView}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                handleView();
-              }
-            }}
-            role="button"
-            tabIndex={0}
-          >
-            <div className={style.fileCardIcon}>
-              <File />
-            </div>
-            <div className={style.fileCardInfo}>
-              <p className={style.fileCardName}>{fileName}</p>
-            </div>
-            <span className={style.fileCardHint}>Click to view</span>
+          <div className={style.actionsRow}>
+            {isUserSuperOrDepartmentAdmin(user) && (
+              <Button onPress={handleDownload} variant="primary">
+                <Download className={style.actionIcon} />
+                Download
+              </Button>
+            )}
+            <Button onPress={handleView} variant="secondary">
+              <Eye className={style.actionIcon} />
+              View Paper
+            </Button>
           </div>
         )}
 
@@ -107,11 +98,6 @@ export const ResearchModal = ({ isOpen, paper, onClose }: ResearchModalProps) =>
               {requestExists ? "Request Submitted" : "Request Document"}
             </Button>
           )}
-        {isUserSuperOrDepartmentAdmin(user) && (
-          <Button onPress={handleDownload} variant="primary">
-            Download
-          </Button>
-        )}
       </DialogContent>
     </Dialog>
   );
