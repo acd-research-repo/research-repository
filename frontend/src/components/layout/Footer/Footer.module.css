@@ -1,7 +1,3 @@
-svg {
-  flex-shrink: 0;
-}
-
 .footer {
   display: flex;
   flex-direction: column;
@@ -9,146 +5,127 @@ svg {
   width: 100%;
   color: var(--color-text-inverted);
   background-color: var(--color-primary);
-}
 
-.footerContainer {
-  width: 100%;
-  max-width: var(--container-max-width);
-  padding-block: var(--space-lg);
-  padding-inline: var(--container-padding-inline);
-  margin: 0 auto;
-}
-
-@media (width >= 768px) {
   .footerContainer {
-    padding-block: var(--space-2xl);
+    width: 100%;
+    max-width: var(--container-max-width);
+    padding-block: var(--space-lg);
     padding-inline: var(--container-padding-inline);
+    margin: 0 auto;
+
+    @media (width >= 768px) {
+      padding-block: var(--space-2xl);
+    }
+
+    .mainContainer {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xl);
+      padding-bottom: var(--space-xl);
+      border-bottom: 1px solid var(--color-border-default);
+
+      @media (width >= 768px) {
+        flex-direction: row;
+        gap: var(--space-2xl);
+        padding-bottom: var(--space-3xl);
+      }
+
+      .titlelogoContainer {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        gap: var(--space-xs);
+
+        .logoTitleRow {
+          display: flex;
+          flex-direction: row;
+          gap: var(--space-md);
+          align-items: center;
+
+          @media (width >= 768px) {
+            gap: var(--space-lg);
+          }
+
+          .logoContainerButton {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: var(--size-logo-md);
+            aspect-ratio: 1;
+            padding: var(--space-md);
+            background-color: var(--color-surface);
+            border-radius: var(--radius-lg);
+
+            .schoolLogo {
+              flex-shrink: 0;
+              width: var(--size-logo-sm);
+              height: auto;
+            }
+          }
+        }
+
+        .textContainer {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-xs);
+
+          .title {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-semibold);
+          }
+
+          .description {
+            font-size: var(--font-size-md);
+            font-weight: var(--font-weight-normal);
+          }
+        }
+      }
+
+      .linkcontactContainer {
+        display: flex;
+        flex-direction: row;
+        gap: var(--space-xl);
+        justify-content: space-evenly;
+        padding: var(--space-lg);
+
+        @media (width >= 768px) {
+          flex-direction: row;
+          gap: var(--space-2xl);
+          justify-content: center;
+          padding: 0;
+        }
+
+        .linksContainer {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-xs);
+
+          .linkText {
+            margin-bottom: var(--space-sm);
+            font-size: var(--font-size-md);
+            font-weight: var(--font-weight-semibold);
+          }
+        }
+
+        .contactContainer {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-xs);
+
+          .contactText {
+            margin-bottom: var(--space-sm);
+            font-size: var(--font-size-md);
+            font-weight: var(--font-weight-semibold);
+          }
+        }
+      }
+    }
+
+    .copyrightNotice {
+      margin-top: var(--space-sm);
+      font-size: var(--font-size-md);
+      font-weight: var(--font-weight-light);
+      text-align: center;
+    }
   }
-}
-
-.mainContainer {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xl);
-  padding-bottom: var(--space-xl);
-  border-bottom: 1px solid var(--color-border-default);
-}
-
-@media (width >= 768px) {
-  .mainContainer {
-    flex-direction: row;
-    gap: var(--space-2xl);
-    padding-bottom: var(--space-3xl);
-  }
-}
-
-.titlelogoContainer {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  gap: var(--space-xs);
-}
-
-.logoTitleRow {
-  display: flex;
-  flex-direction: row;
-  gap: var(--space-md);
-  align-items: center;
-}
-
-@media (width >= 768px) {
-  .logoTitleRow {
-    gap: var(--space-lg);
-  }
-}
-
-.description {
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-normal);
-}
-
-.logoContainerButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: auto;
-  min-width: var(--size-logo-xs);
-  padding: var(--space-sm);
-  background-color: var(--color-surface);
-  border-radius: var(--radius-lg);
-}
-
-@media (width >= 768px) {
-  .logoContainerButton {
-    min-width: var(--size-logo-md);
-    padding: var(--space-md);
-  }
-}
-
-.schoolLogo {
-  flex-shrink: 0;
-  width: var(--size-logo-xs);
-  height: auto;
-}
-
-@media (width >= 768px) {
-  .schoolLogo {
-    width: var(--size-logo-xs);
-  }
-}
-
-.title {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-semibold);
-}
-
-.linkcontactContainer {
-  display: flex;
-  flex-direction: row;
-  gap: var(--space-xl);
-  justify-content: space-evenly;
-  padding: var(--space-lg);
-}
-
-@media (width >= 768px) {
-  .linkcontactContainer {
-    flex-direction: row;
-    gap: var(--space-2xl);
-    justify-content: center;
-    padding: 0;
-  }
-}
-
-.linksContainer {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xs);
-}
-
-.linkText {
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-semibold);
-}
-
-.linksContainer h3,
-.contactContainer h3 {
-  margin-bottom: var(--space-sm);
-}
-
-.contactContainer {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xs);
-}
-
-.contactText {
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-semibold);
-}
-
-.copyrightNotice {
-  margin-top: var(--space-sm);
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-light);
-  text-align: center;
 }

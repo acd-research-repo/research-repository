@@ -39,13 +39,15 @@ export const Footer = ({ className, ...props }: ComponentProps) => {
                 <img className={style.schoolLogo} src={schoolLogo} alt="school-logo" />
               </Button>
 
-              <h1 className={style.title}>ACD Research Repository</h1>
+              <div className={style.textContainer}>
+                <h1 className={style.title}>ACD Research Repository</h1>
+                <p className={style.subtitle}>Assumption Collage of Davao</p>
+                <p className={style.description}>
+                  The official research repository of Assumption College of Davao, providing access
+                  to academic research and scholarly work.
+                </p>
+              </div>
             </div>
-
-            <p className={style.description}>
-              The official research repository of Assumption College of Davao, providing access to
-              academic research and scholarly work.
-            </p>
           </div>
 
           <div className={style.linkcontactContainer}>
@@ -79,7 +81,7 @@ export const Footer = ({ className, ...props }: ComponentProps) => {
                       padding: "20px",
                     }}
                   >
-                    You found a link to nowhere. Sometimes, that's progress.
+                    You found a link to nowhere.
                   </DialogDescription>
                 </DialogContent>
               </Dialog>
@@ -115,7 +117,6 @@ export const Footer = ({ className, ...props }: ComponentProps) => {
           </div>
         </div>
         <h4 className={style.copyrightNotice}>
-          {/* The meaning of life isnt here, I checked. */}
           &copy; {new Date().getFullYear()} Assumption College of Davao. All rights reserved.
         </h4>
       </div>
