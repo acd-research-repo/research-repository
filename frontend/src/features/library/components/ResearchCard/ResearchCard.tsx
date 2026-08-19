@@ -6,9 +6,10 @@ import type { ResearchPaper } from "@/types";
 interface ResearchCardProps {
   researchPaper: ResearchPaper;
   onView: () => void;
+  loading?: boolean;
 }
 
-export const ResearchCard = ({ researchPaper, onView }: ResearchCardProps) => {
+export const ResearchCard = ({ researchPaper, onView, loading }: ResearchCardProps) => {
   const formattedDate = new Date(researchPaper.submissionDate).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
@@ -37,7 +38,7 @@ export const ResearchCard = ({ researchPaper, onView }: ResearchCardProps) => {
         )}
       </div>
       <p className={style.abstract}>{researchPaper.abstractText}</p>
-      <Button onClick={onView}>
+      <Button onClick={onView} isPending={loading} isDisabled={loading}>
         <Eye className={style.iconEye} />
         View Details
       </Button>

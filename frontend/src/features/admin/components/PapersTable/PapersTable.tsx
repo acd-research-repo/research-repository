@@ -161,13 +161,15 @@ export function PapersTable({ archived, showDepartment = true }: PapersTableProp
         emptyMessage={searchQuery ? "No papers match your search." : undefined}
       />
 
-      <ResearchModal
-        isOpen={!!selectedPaper}
-        paper={selectedPaper}
-        onClose={() => {
-          setSelectedPaper(null);
-        }}
-      />
+      {selectedPaper && (
+        <ResearchModal
+          isOpen
+          paper={selectedPaper}
+          onClose={() => {
+            setSelectedPaper(null);
+          }}
+        />
+      )}
 
       <EditPaperModal
         isOpen={!!editingPaper}

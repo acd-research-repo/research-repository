@@ -1,13 +1,15 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LibraryResults } from "../components/LibraryResults/LibraryResults";
 import { useLibrary } from "../hooks/useLibrary";
 import style from "./LibraryPage.module.css";
 import { Button } from "@/components/common/Button/Button";
+import { toastQueue } from "@/components/common/Toast/Toast";
 import { Footer } from "@/components/layout/Footer/Footer";
 import { Header } from "@/components/layout/Header/Header";
 import { ResearchModal } from "@/components/layout/ResearchModal/ResearchModal";
 import { SearchNFilter } from "@/features/library/components/SearchNFilter/SearchNFilter";
+import { usePaperById } from "@/features/library/hooks/usePaperById";
 import { useScrollToTop } from "@/hooks/useScrollToTop";
 
 export const LibraryPage = () => {
@@ -28,8 +30,19 @@ export const LibraryPage = () => {
   } = useLibrary();
   const [selectedPaperId, setSelectedPaperId] = useState<number | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const {
+    paper: selectedPaper,
+    loading: paperLoading,
+    error: paperError,
+  } = usePaperById(selectedPaperId);
 
   useScrollToTop([currentPage]);
+
+  useEffect(() => {
+    if (paperError && isModalOpen) {
+      toastQueue.add({ variant: "error", title: "Failed to load paper", description: paperError });
+    }
+  }, [paperError, isModalOpen]);
 
   const handleOpenModal = (id: number) => {
     setSelectedPaperId(id);
@@ -72,6 +85,7 @@ export const LibraryPage = () => {
               selectedDepartment={selectedDepartment}
               selectedYear={selectedYear}
               onViewPaper={handleOpenModal}
+              loadingPaperId={paperLoading ? selectedPaperId : null}
             />
           </section>
 
@@ -103,13 +117,15 @@ export const LibraryPage = () => {
         </div>
       </main>
 
-      <ResearchModal
-        paperId={selectedPaperId}
-        isOpen={isModalOpen}
-        onClose={() => {
-          setIsModalOpen(false);
-        }}
-      />
+      {isModalOpen && selectedPaper && (
+        <ResearchModal
+          isOpen
+          paper={selectedPaper}
+          onClose={() => {
+            setIsModalOpen(false);
+          }}
+        />
+      )}
 
       <Footer />
     </div>

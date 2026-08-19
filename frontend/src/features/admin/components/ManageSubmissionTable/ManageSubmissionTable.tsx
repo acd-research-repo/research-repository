@@ -147,13 +147,15 @@ export function ManageSubmissionTable({ showDepartment = true }: ManageSubmissio
         emptyMessage={searchQuery ? "No submissions match your search." : undefined}
       />
 
-      <ResearchModal
-        isOpen={!!selectedPaper}
-        paper={selectedPaper}
-        onClose={() => {
-          setSelectedPaper(null);
-        }}
-      />
+      {selectedPaper && (
+        <ResearchModal
+          isOpen
+          paper={selectedPaper}
+          onClose={() => {
+            setSelectedPaper(null);
+          }}
+        />
+      )}
 
       <ConfirmDialog
         open={!!confirmAction}

@@ -111,13 +111,15 @@ export const StudentSubmissionTable = () => {
         emptyMessage={searchQuery ? "No submissions match your search." : undefined}
       />
 
-      <ResearchModal
-        isOpen={!!viewPaper}
-        paper={viewPaper}
-        onClose={() => {
-          setViewPaper(null);
-        }}
-      />
+      {viewPaper && (
+        <ResearchModal
+          isOpen
+          paper={viewPaper}
+          onClose={() => {
+            setViewPaper(null);
+          }}
+        />
+      )}
 
       <PaperUploadModal
         isOpen={!!editPaper}

@@ -11,9 +11,16 @@ interface LibraryResultsProps {
   selectedDepartment: string | null;
   selectedYear: string | null;
   onViewPaper: (id: number) => void;
+  loadingPaperId?: number | null;
 }
 
-export const LibraryResults = ({ loading, error, papers, onViewPaper }: LibraryResultsProps) => {
+export const LibraryResults = ({
+  loading,
+  error,
+  papers,
+  onViewPaper,
+  loadingPaperId,
+}: LibraryResultsProps) => {
   if (error) {
     return <p className={style.errorMessage}>Error: {error}</p>;
   }
@@ -40,6 +47,7 @@ export const LibraryResults = ({ loading, error, papers, onViewPaper }: LibraryR
         <ResearchCard
           key={research.paperId}
           researchPaper={research}
+          loading={loadingPaperId === research.paperId}
           onView={() => {
             onViewPaper(research.paperId);
           }}

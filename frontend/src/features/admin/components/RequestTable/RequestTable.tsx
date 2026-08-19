@@ -131,13 +131,15 @@ export function RequestsTable({ showDepartment = true }: RequestsTableProps) {
         emptyMessage={searchQuery ? "No requests match your search." : undefined}
       />
 
-      <ResearchModal
-        isOpen={!!selectedPaper}
-        paper={selectedPaper}
-        onClose={() => {
-          setSelectedPaper(null);
-        }}
-      />
+      {selectedPaper && (
+        <ResearchModal
+          isOpen
+          paper={selectedPaper}
+          onClose={() => {
+            setSelectedPaper(null);
+          }}
+        />
+      )}
 
       <ConfirmDialog
         open={!!confirmAction}
