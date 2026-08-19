@@ -1,13 +1,10 @@
-import clsx from "clsx";
 import { File } from "lucide-react";
 import { usePaperRequest } from "./hook/usePaperRequest";
 import style from "./ResearchModal.module.css";
 import { downloadFile, viewFileInTab } from "@/api/files";
 import { Button } from "@/components/common/Button/Button";
 import { Dialog, DialogClose, DialogContent, DialogTitle } from "@/components/common/Dialog/Dialog";
-import { LoadingSpinner } from "@/components/common/LoadingSpinner/LoadingSpinner";
 import { useAuth } from "@/features/auth/context/useAuth";
-import { usePaperById } from "@/features/library/hooks/usePaperById";
 import type { ResearchPaper } from "@/types";
 import { triggerBrowserDownload } from "@/util/download";
 import { formatDateLong } from "@/util/formatDate";
@@ -15,58 +12,19 @@ import { isUserFaculty, isUserStudent, isUserSuperOrDepartmentAdmin } from "@/ut
 
 interface ResearchModalProps {
   isOpen: boolean;
-  paperId?: number | null;
-  paper?: ResearchPaper | null;
+  paper: ResearchPaper;
   onClose: () => void;
 }
 
-export const ResearchModal = ({
-  isOpen,
-  paper: paperProp,
-  paperId,
-  onClose,
-}: ResearchModalProps) => {
-  const effectiveId = paperProp ? null : (paperId ?? null);
-  const { paper: fetchedPaper, loading, error } = usePaperById(effectiveId);
-  const paper = paperProp ?? fetchedPaper;
+export const ResearchModal = ({ isOpen, paper, onClose }: ResearchModalProps) => {
   const { user } = useAuth();
-  const { requestExists, isRequestLoading, requestDocument } = usePaperRequest(effectiveId, user);
+  const { requestExists, isRequestLoading, requestDocument } = usePaperRequest(paper.paperId, user);
 
   const handleOpenChange = (open: boolean) => {
     if (!open) {
       onClose();
     }
   };
-
-  if (loading) {
-    return (
-      <Dialog open={isOpen} onOpenChange={handleOpenChange}>
-        <DialogContent
-          className={clsx(style.modalLoadingOrError, style.moda)}
-          aria-describedby={undefined}
-        >
-          <DialogClose onClose={onClose} />
-          <LoadingSpinner message="Fetching details" />
-        </DialogContent>
-      </Dialog>
-    );
-  }
-
-  if (error || !paper) {
-    return (
-      <Dialog open={isOpen} onOpenChange={handleOpenChange} title="Error">
-        <DialogContent
-          className={clsx(style.modalLoadingOrError, style.modal)}
-          aria-describedby={undefined}
-        >
-          <DialogClose onClose={onClose} />
-          <DialogTitle className={style.title}>Error</DialogTitle>
-          <p>{error ?? "Paper not found"}</p>
-          <Button onClick={onClose}>Close</Button>
-        </DialogContent>
-      </Dialog>
-    );
-  }
 
   const formattedDate = formatDateLong(paper.submissionDate);
   const department = paper.department.departmentName;
