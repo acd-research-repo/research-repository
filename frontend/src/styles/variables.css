@@ -146,6 +146,7 @@
      Container Widths
   ---------------------------------- */
   --container-max-width: 1400px;
+  --container-padding-inline: var(--space-xl);
 
   /* ---------------------------------
      Elevation & Interaction Effects
@@ -188,4 +189,10 @@
   --icon-size-lg: 18px;
   --icon-size-xl: 20px;
   --icon-size-2xl: 24px;
+}
+
+@media (width >= 768px) {
+  :root {
+    --container-padding-inline: var(--space-7xl);
+  }
 }

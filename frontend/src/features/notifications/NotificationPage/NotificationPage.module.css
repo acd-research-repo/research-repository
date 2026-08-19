@@ -20,12 +20,14 @@
   width: 100%;
   max-width: var(--container-max-width);
   min-height: 90vh;
-  padding: var(--space-lg);
+  padding-block: var(--space-lg);
+  padding-inline: var(--container-padding-inline);
 }
 
 @media (width >= 768px) {
   .mainContainer {
-    padding: var(--space-2xl) var(--space-7xl);
+    padding-block: var(--space-2xl);
+    padding-inline: var(--container-padding-inline);
   }
 }
 
