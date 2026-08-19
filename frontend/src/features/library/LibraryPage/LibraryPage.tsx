@@ -4,7 +4,7 @@ import { LibraryResults } from "../components/LibraryResults/LibraryResults";
 import { useLibrary } from "../hooks/useLibrary";
 import style from "./LibraryPage.module.css";
 import { Button } from "@/components/common/Button/Button";
-import { toastQueue } from "@/components/common/Toast/Toast";
+import { toastQueue } from "@/components/common/Toast/toastQueue";
 import { Footer } from "@/components/layout/Footer/Footer";
 import { Header } from "@/components/layout/Header/Header";
 import { ResearchModal } from "@/components/layout/ResearchModal/ResearchModal";

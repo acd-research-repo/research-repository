@@ -19,7 +19,7 @@ import { ConfirmDialog } from "@/components/common/ConfirmDialog/ConfirmDialog";
 import { DataTable } from "@/components/common/DataTable/DataTable";
 import { Input } from "@/components/common/Input/Input";
 import { LoadingSpinner } from "@/components/common/LoadingSpinner/LoadingSpinner";
-import { toastQueue } from "@/components/common/Toast/Toast";
+import { toastQueue } from "@/components/common/Toast/toastQueue";
 import { ResearchModal } from "@/components/layout/ResearchModal/ResearchModal";
 import { usePaginatedSearch } from "@/hooks/usePaginatedSearch";
 import type { ResearchPaper } from "@/types";

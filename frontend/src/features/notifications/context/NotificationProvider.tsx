@@ -1,17 +1,10 @@
 import { useQueryClient } from "@tanstack/react-query";
-import { createContext, type ReactNode, useCallback, useContext, useEffect, useState } from "react";
+import { type ReactNode, useCallback, useEffect, useState } from "react";
+import { NotificationContext } from "./NotificationContext";
 import { axiosClient } from "@/api/axiosClient";
 import { markAllRead as markAllReadApi, markAsRead as markAsReadApi } from "@/api/notifications";
 import { useAuth } from "@/features/auth/context/useAuth";
 import { useNotificationStream } from "@/features/notifications/hooks/useNotificationStream";
-
-interface NotificationContextValue {
-  unreadCount: number;
-  markAllRead: () => Promise<void>;
-  markAsRead: (notificationId: number, wasUnread: boolean) => Promise<void>;
-}
-
-const NotificationContext = createContext<NotificationContextValue | undefined>(undefined);
 
 export function NotificationProvider({ children }: { children: ReactNode }) {
   const queryClient = useQueryClient();
@@ -86,12 +79,4 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
       {children}
     </NotificationContext.Provider>
   );
-}
-
-export function useNotificationContext(): NotificationContextValue {
-  const context = useContext(NotificationContext);
-  if (context == null) {
-    throw new Error("useNotificationContext must be used within a NotificationProvider");
-  }
-  return context;
 }

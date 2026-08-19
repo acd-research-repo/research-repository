@@ -8,7 +8,7 @@ import style from "./SuperAdminDepartmentsPage.module.css";
 import type { AdminDepartment } from "@/api/admin/departments";
 import { Button } from "@/components/common/Button/Button";
 import { ConfirmDialog } from "@/components/common/ConfirmDialog/ConfirmDialog";
-import { toastQueue } from "@/components/common/Toast/Toast";
+import { toastQueue } from "@/components/common/Toast/toastQueue";
 import { Footer } from "@/components/layout/Footer/Footer";
 import { Header } from "@/components/layout/Header/Header";
 

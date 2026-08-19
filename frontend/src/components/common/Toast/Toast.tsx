@@ -6,20 +6,10 @@ import {
   UNSTABLE_Toast as Toast,
   UNSTABLE_ToastContent as ToastContent,
   type ToastProps,
-  UNSTABLE_ToastQueue as ToastQueue,
   UNSTABLE_ToastRegion as ToastRegion,
 } from "react-aria-components/Toast";
 import styles from "./Toast.module.css";
-
-interface ToastData {
-  variant: "success" | "error" | "normal";
-  title: string;
-  description?: string;
-}
-
-export const toastQueue = new ToastQueue<ToastData>({
-  maxVisibleToasts: 5,
-});
+import { type ToastData, toastQueue } from "./toastQueue";
 
 export function ToastRegionProvider() {
   return (
