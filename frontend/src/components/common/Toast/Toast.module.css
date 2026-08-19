@@ -22,20 +22,71 @@
   outline: none;
   box-shadow: var(--shadow-modal);
   animation: slide-in var(--transition-normal);
-}
 
-.toast[data-hovered] {
-  background: var(--color-surface-hover);
+  &[data-hovered] {
+    background: var(--color-surface-hover);
+  }
+
+  &[data-focus-visible] {
+    outline: 2px solid var(--color-border-outline);
+    outline-offset: -2px;
+  }
+
+  .content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+
+    .title {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-text);
+    }
+
+    .description {
+      margin-top: var(--space-xs);
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+    }
+  }
+
+  .closeButton {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    color: var(--color-text-muted);
+    appearance: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    border-radius: var(--radius-sm);
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+
+    &[data-hovered] {
+      color: var(--color-text);
+      background: var(--color-surface-hover);
+    }
+
+    &[data-pressed] {
+      background: var(--color-surface-disabled);
+    }
+
+    &[data-focus-visible] {
+      outline: 2px solid var(--color-border-outline);
+      outline-offset: 2px;
+    }
+  }
 }
 
 .exiting {
   animation: slide-out var(--transition-normal);
   animation-fill-mode: forwards;
-}
-
-.toast[data-focus-visible] {
-  outline: 2px solid var(--color-border-outline);
-  outline-offset: -2px;
 }
 
 .success {
@@ -44,25 +95,6 @@
 
 .error {
   border-color: var(--color-error);
-}
-
-.content {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  min-width: 0;
-}
-
-.title {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text);
-}
-
-.description {
-  margin-top: var(--space-xs);
-  font-size: var(--font-size-xs);
-  color: var(--color-text-muted);
 }
 
 @keyframes slide-in {
@@ -77,36 +109,4 @@
     opacity: 0%;
     translate: 100% 0;
   }
-}
-
-.closeButton {
-  display: flex;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  padding: 0;
-  color: var(--color-text-muted);
-  appearance: none;
-  cursor: pointer;
-  background: none;
-  border: none;
-  border-radius: var(--radius-sm);
-  outline: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.closeButton[data-hovered] {
-  color: var(--color-text);
-  background: var(--color-surface-hover);
-}
-
-.closeButton[data-pressed] {
-  background: var(--color-surface-disabled);
-}
-
-.closeButton[data-focus-visible] {
-  outline: 2px solid var(--color-border-outline);
-  outline-offset: 2px;
 }

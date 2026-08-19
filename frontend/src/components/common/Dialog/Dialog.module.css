@@ -56,19 +56,19 @@
   background: transparent;
   border: none;
   transition: var(--transition-elevation);
-}
 
-.closeButton:hover {
-  transform: translateY(var(--translate-hover)) scale(var(--scale-hover));
-}
+  &:hover {
+    transform: translateY(var(--translate-hover)) scale(var(--scale-hover));
+  }
 
-.closeButton:active {
-  transform: translateY(var(--translate-active)) scale(var(--scale-active));
-}
+  &:active {
+    transform: translateY(var(--translate-active)) scale(var(--scale-active));
+  }
 
-.iconClose {
-  width: var(--icon-size-xl);
-  height: var(--icon-size-xl);
+  .iconClose {
+    width: var(--icon-size-xl);
+    height: var(--icon-size-xl);
+  }
 }
 
 .dialog {

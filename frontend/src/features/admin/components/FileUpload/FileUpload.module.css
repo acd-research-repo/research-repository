@@ -1,100 +1,100 @@
+.isDragOver .fileInputLabel {
+  background-color: color-mix(in srgb, var(--color-primary) 8%, transparent);
+  border-color: var(--color-primary);
+}
+
 .fileUploadContainer {
   display: flex;
   flex-direction: column;
   gap: var(--space-xs);
   max-width: 100%;
   overflow: hidden;
-}
 
-.input {
-  display: none;
-}
+  .input {
+    display: none;
+  }
 
-.fileInputLabel {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding: var(--space-lg);
-  cursor: pointer;
-  background-color: var(--color-input-bg);
-  border: 2px dashed var(--color-border-default);
-  border-radius: var(--radius-lg);
-}
+  .fileInputLabel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: var(--space-lg);
+    cursor: pointer;
+    background-color: var(--color-input-bg);
+    border: 2px dashed var(--color-border-default);
+    border-radius: var(--radius-lg);
 
-.fileInputLabel:has(.fileNameContainer) {
-  padding: var(--space-sm);
-  border-color: var(--color-border-hover);
-  border-style: solid;
+    &:has(.fileNameContainer) {
+      padding: var(--space-sm);
+      border-color: var(--color-border-hover);
+      border-style: solid;
+    }
+
+    .fileNameContainer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: var(--space-xs) var(--space-sm);
+      background-color: var(--color-surface-secondary);
+      border-radius: var(--radius-md);
+
+      .fileName {
+        max-width: 70%;
+        overflow: hidden;
+        font-size: var(--font-size-sm);
+        font-weight: var(--font-weight-medium);
+        color: var(--color-primary);
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .removeButton {
+        flex-shrink: 0;
+        width: 24px;
+        height: 24px;
+        margin-left: var(--space-xs);
+        font-size: var(--font-size-lg);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-text-secondary);
+        cursor: pointer;
+        background: var(--color-surface-tertiary);
+        border: none;
+        border-radius: 50%;
+        transition: var(--transition-elevation);
+
+        &:hover {
+          color: var(--color-text);
+          background-color: var(--color-danger);
+          transform: translateY(var(--translate-hover)) scale(var(--scale-hover));
+        }
+      }
+    }
+
+    .iconUpload {
+      width: var(--icon-size-xl);
+      height: var(--icon-size-xl);
+    }
+  }
+
+  .fileInputNote {
+    font-size: var(--font-size-sm);
+    color: var(--color-surface-secondary);
+  }
 }
 
 @media (width >= 768px) {
-  .fileInputLabel {
+  .fileUploadContainer .fileInputLabel {
     box-shadow: var(--shadow-resting);
     transition: var(--transition-elevation);
   }
 
-  .fileInputLabel:hover {
+  .fileUploadContainer .fileInputLabel:hover {
     border-color: var(--border-hover);
     box-shadow: var(--shadow-hover);
     transform: translateY(var(--translate-hover)) scale(var(--scale-hover));
   }
-}
-
-.fileInputNote {
-  font-size: var(--font-size-sm);
-  color: var(--color-surface-secondary);
-}
-
-.fileNameContainer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: var(--space-xs) var(--space-sm);
-  background-color: var(--color-surface-secondary);
-  border-radius: var(--radius-md);
-}
-
-.fileName {
-  max-width: 70%;
-  overflow: hidden;
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-primary);
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.removeButton {
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-  margin-left: var(--space-xs);
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-secondary);
-  cursor: pointer;
-  background: var(--color-surface-tertiary);
-  border: none;
-  border-radius: 50%;
-  transition: var(--transition-elevation);
-}
-
-.removeButton:hover {
-  color: var(--color-text);
-  background-color: var(--color-danger);
-  transform: translateY(var(--translate-hover)) scale(var(--scale-hover));
-}
-
-.iconUpload {
-  width: var(--icon-size-xl);
-  height: var(--icon-size-xl);
-}
-
-.isDragOver .fileInputLabel {
-  background-color: color-mix(in srgb, var(--color-primary) 8%, transparent);
-  border-color: var(--color-primary);
 }

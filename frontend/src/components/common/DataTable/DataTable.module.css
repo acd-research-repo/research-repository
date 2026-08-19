@@ -12,27 +12,47 @@
   border: 1px solid var(--color-border-default);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-active);
-}
 
-.table {
-  width: 100%;
-  min-width: 640px;
-  margin-bottom: auto;
-  border-spacing: 0;
-  border-collapse: separate;
-}
+  .table {
+    width: 100%;
+    min-width: 640px;
+    margin-bottom: auto;
+    border-spacing: 0;
+    border-collapse: separate;
 
-.tableCaption {
-  padding: var(--space-md);
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
-  text-align: left;
-  caption-side: top;
-  border-bottom: 1px solid var(--color-border-default);
-}
+    .tableCaption {
+      padding: var(--space-md);
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-bold);
+      text-align: left;
+      caption-side: top;
+      border-bottom: 1px solid var(--color-border-default);
+    }
 
-.tableHead {
-  background: var(--color-surface);
+    .tableHead {
+      background: var(--color-surface);
+    }
+  }
+
+  .pagination {
+    display: flex;
+    gap: var(--space-md);
+    align-items: center;
+    justify-content: flex-end;
+    padding: var(--space-md);
+    border-top: 1px solid var(--color-border-default);
+
+    .paginationButton {
+      width: fit-content;
+      padding: var(--space-sm) var(--space-md);
+      font-size: var(--font-size-sm);
+    }
+
+    .pageIndicator {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+    }
+  }
 }
 
 .tableData {
@@ -51,7 +71,10 @@
   transition: background 0.15s;
 }
 
-/* Joined selector for high specificity centering */
+.tableRow:hover .tableBodyData {
+  background: var(--color-bg);
+}
+
 .tableBodyData.emptyStateCell {
   padding: var(--space-xl) 0;
   font-style: italic;
@@ -62,28 +85,4 @@
 :global(.narrowFit) {
   width: 1%;
   white-space: nowrap;
-}
-
-.tableRow:hover .tableBodyData {
-  background: var(--color-bg);
-}
-
-.pagination {
-  display: flex;
-  gap: var(--space-md);
-  align-items: center;
-  justify-content: flex-end;
-  padding: var(--space-md);
-  border-top: 1px solid var(--color-border-default);
-}
-
-.paginationButton {
-  width: fit-content;
-  padding: var(--space-sm) var(--space-md);
-  font-size: var(--font-size-sm);
-}
-
-.pageIndicator {
-  font-size: var(--font-size-xs);
-  color: var(--color-text-muted);
 }

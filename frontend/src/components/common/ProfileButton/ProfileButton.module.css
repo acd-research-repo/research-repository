@@ -1,21 +1,35 @@
-.userName {
-  overflow: hidden;
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-bold);
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.userRole {
-  overflow: hidden;
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-light);
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
 .profileButton {
   display: none;
+
+  .iconUser {
+    width: var(--icon-size-md);
+    height: var(--icon-size-md);
+  }
+
+  .profileContainer {
+    display: flex;
+    flex-direction: column;
+    max-width: 120px;
+    overflow: hidden;
+    line-height: var(--line-height-tight);
+    text-overflow: ellipsis;
+
+    .userName {
+      overflow: hidden;
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-bold);
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .userRole {
+      overflow: hidden;
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-light);
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
 }
 
 @media (width >= 768px) {
@@ -27,19 +41,8 @@
     padding: var(--space-xs) var(--space-md);
     border-radius: var(--radius-lg);
   }
-}
 
-.profileContainer {
-  display: flex;
-  flex-direction: column;
-  max-width: 120px;
-  overflow: hidden;
-  line-height: var(--line-height-tight);
-  text-overflow: ellipsis;
-}
-
-@media (width >= 768px) {
-  .profileContainer {
+  .profileButton .profileContainer {
     display: flex;
     flex-direction: column;
     max-width: 120px;
@@ -48,9 +51,4 @@
     text-align: left;
     text-overflow: ellipsis;
   }
-}
-
-.iconUser {
-  width: var(--icon-size-md);
-  height: var(--icon-size-md);
 }
