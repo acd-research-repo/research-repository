@@ -29,7 +29,8 @@ export const LibraryPage = () => {
     pagination,
   } = useLibrary();
   const [selectedPaperId, setSelectedPaperId] = useState<number | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const isModalOpen = selectedPaperId !== null;
+  const [prevPaperError, setPrevPaperError] = useState<string | null>(null);
   const {
     paper: selectedPaper,
     loading: paperLoading,
@@ -38,15 +39,19 @@ export const LibraryPage = () => {
 
   useScrollToTop([currentPage]);
 
+  if (paperError && paperError !== prevPaperError) {
+    setPrevPaperError(paperError);
+    setSelectedPaperId(null);
+  }
+
   useEffect(() => {
-    if (paperError && isModalOpen) {
+    if (paperError) {
       toastQueue.add({ variant: "error", title: "Failed to load paper", description: paperError });
     }
-  }, [paperError, isModalOpen]);
+  }, [paperError]);
 
   const handleOpenModal = (id: number) => {
     setSelectedPaperId(id);
-    setIsModalOpen(true);
   };
 
   return (
@@ -122,7 +127,7 @@ export const LibraryPage = () => {
           isOpen
           paper={selectedPaper}
           onClose={() => {
-            setIsModalOpen(false);
+            setSelectedPaperId(null);
           }}
         />
       )}
