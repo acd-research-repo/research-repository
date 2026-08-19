@@ -1,6 +1,6 @@
 .bellButton {
   position: relative;
-  display: flex;
+  display: inline-flex;
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
@@ -10,8 +10,8 @@
   padding: 0;
 
   .bellIcon {
-    width: 20px;
-    height: 20px;
+    width: var(--icon-size-md);
+    height: var(--icon-size-md);
   }
 
   .badge {
