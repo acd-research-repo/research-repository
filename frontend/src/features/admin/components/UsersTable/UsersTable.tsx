@@ -8,7 +8,7 @@ import { getDepartments } from "@/api/filter";
 import { DataTable } from "@/components/common/DataTable/DataTable";
 import { Input } from "@/components/common/Input/Input";
 import { LoadingSpinner } from "@/components/common/LoadingSpinner/LoadingSpinner";
-import { toastQueue } from "@/components/common/Toast/Toast";
+import { toastQueue } from "@/components/common/Toast/toastQueue";
 import { usePaginatedSearch } from "@/hooks/usePaginatedSearch";
 import type { User } from "@/types";
 

@@ -2,7 +2,7 @@ import { Bell } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import style from "./NotificationBell.module.css";
 import { Button } from "@/components/common/Button/Button";
-import { useNotificationContext } from "@/features/notifications/context/NotificationContext";
+import { useNotificationContext } from "@/features/notifications/context/useNotificationContext";
 
 export const NotificationBell = () => {
   const { unreadCount } = useNotificationContext();

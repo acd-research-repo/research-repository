@@ -15,7 +15,7 @@ import {
 import { Input } from "@/components/common/Input/Input";
 import { Select, SelectItem } from "@/components/common/Select/Select";
 import { Textarea } from "@/components/common/Textarea/Textarea";
-import { toastQueue } from "@/components/common/Toast/Toast";
+import { toastQueue } from "@/components/common/Toast/toastQueue";
 import { useAuth } from "@/features/auth/context/useAuth";
 import type { ResearchPaper } from "@/types";
 import { extractApiError, getUserErrorMessage } from "@/util/errorHandler";

@@ -10,7 +10,7 @@ import { useRoleWatcher } from "@/features/auth/hooks/useRoleWatcher";
 import { LoginPage } from "@/features/auth/LoginPage/LoginPage";
 import { FacultyRequestPage } from "@/features/faculty/FacultyRequestPage/FacultyRequestPage";
 import { LibraryPage } from "@/features/library/LibraryPage/LibraryPage";
-import { NotificationProvider } from "@/features/notifications/context/NotificationContext";
+import { NotificationProvider } from "@/features/notifications/context/NotificationProvider";
 import { NotificationPage } from "@/features/notifications/NotificationPage/NotificationPage";
 import { StudentRequestPage } from "@/features/student/StudentRequestPage/StudentRequestPage";
 

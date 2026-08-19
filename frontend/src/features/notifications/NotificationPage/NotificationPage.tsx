@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import style from "./NotificationPage.module.css";
 import { getNotifications } from "@/api/notifications";
 import { Button } from "@/components/common/Button/Button";
-import { toastQueue } from "@/components/common/Toast/Toast";
+import { toastQueue } from "@/components/common/Toast/toastQueue";
 import { Footer } from "@/components/layout/Footer/Footer";
 import { Header } from "@/components/layout/Header/Header";
 import { useAuth } from "@/features/auth/context/useAuth";
 import { NotificationList } from "@/features/notifications/components/NotificationList/NotificationList";
-import { useNotificationContext } from "@/features/notifications/context/NotificationContext";
+import { useNotificationContext } from "@/features/notifications/context/useNotificationContext";
 import type { NotificationDto, Role } from "@/types";
 
 const REQUEST_PATH: Record<Role, string> = {
